@@ -127,3 +127,20 @@ for each_url in course_links_file:
             else:
                 course_data['Full_Time'] = 'no'
             print('PART-TIME/FULL-TIME: ', course_data['Part_Time'] + ' / ' + course_data['Full_Time'])
+
+    # career outcomes
+    career_title = soup.find('p', text=re.compile('Your future career', re.IGNORECASE))
+    if career_title:
+        career_ul = career_title.find_next_sibling('ul')
+        if career_ul:
+            career_list = []
+            career_li_list = career_ul.find_all('li')
+            if career_li_list:
+                for li in career_li_list:
+                    career_list.append(li.get_text())"Duration (years)"
+                career_list = ' / '.join(career_list)
+                course_data['Career_Outcomes'] = career_list
+    else:
+        course_data['Career_Outcomes'] = 'Not Mentioned'
+    print('CAREER OUTCOMES: ', course_data['Career_Outcomes'])
+
