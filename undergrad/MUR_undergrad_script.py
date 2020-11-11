@@ -111,3 +111,19 @@ for each_url in course_links_file:
             course_data['Prerequisite_1_grade'] = atar.get_text()
             course_data['Prerequisite_1'] = 'year 12'
             print('ATAR: ', atar.get_text())
+
+    # STUDY MODE
+    study_mode_tag = soup.find('h4', text=re.compile('Study mode', re.IGNORECASE))
+    if study_mode_tag:
+        study_mode = study_mode_tag.find_next_sibling('span')
+        if study_mode:
+            s_text = study_mode.get_text().lower()
+            if 'part time' in s_text or 'part-time' in s_text:
+                course_data['Part_Time'] = 'yes'
+            else:
+                course_data['Part_Time'] = 'no'
+            if 'full time' in s_text or 'full-time' in s_text:
+                course_data['Full_Time'] = 'yes'
+            else:
+                course_data['Full_Time'] = 'no'
+            print('PART-TIME/FULL-TIME: ', course_data['Part_Time'] + ' / ' + course_data['Full_Time'])
