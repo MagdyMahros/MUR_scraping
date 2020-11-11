@@ -65,6 +65,7 @@ for each_url in course_links_file:
         title_text = title.get_text()
         course_data['Course'] = title_text
         print('COURSE TITLE: ', title_text)
+    time.sleep(0.5)
 
     # DECIDE THE LEVEL CODE
     for i in level_key:
@@ -137,10 +138,26 @@ for each_url in course_links_file:
             career_li_list = career_ul.find_all('li')
             if career_li_list:
                 for li in career_li_list:
-                    career_list.append(li.get_text())"Duration (years)"
+                    career_list.append(li.get_text())
                 career_list = ' / '.join(career_list)
                 course_data['Career_Outcomes'] = career_list
     else:
         course_data['Career_Outcomes'] = 'Not Mentioned'
     print('CAREER OUTCOMES: ', course_data['Career_Outcomes'])
+
+    # DURATION
+    duration_title = soup.find('h4', text=re.compile(r'Duration \(years\)', re.IGNORECASE))
+    if duration_title:
+        duration = duration_title.find_next_sibling('span')
+        if duration:
+            duration_text = duration.get_text()
+            duration_ = re.search(r'\d+', duration_text)
+            if duration_:
+                if 1 in duration_:
+                    course_data['Duration'] = duration_
+                    course_data['Duration_Time'] = 'Year'
+                else:
+                    course_data['Duration'] = duration_
+                    course_data['Duration_Time'] = 'Years'
+                print('Duration: ', str(course_data['Duration']) + ' / ' + course_data['Duration_Time'])
 
