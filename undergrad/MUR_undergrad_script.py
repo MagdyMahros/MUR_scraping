@@ -87,3 +87,17 @@ for each_url in course_links_file:
         else:
             course_data['Course_Lang'] = 'English'
     print('COURSE LANGUAGE: ', course_data['Course_Lang'])
+
+    # DESCRIPTION
+    desc_div = soup.find('div', class_='bigtext')
+    if desc_div:
+        desc_list = []
+        desc_p_list = desc_div.find_all('p')
+        if desc_p_list:
+            for p in desc_p_list:
+                desc_list.append(p.get_text())
+            desc_list = ' '.join(desc_list)
+            course_data['Description'] = desc_list
+            print('COURSE DESCRIPTION: ', desc_list)
+
+    
