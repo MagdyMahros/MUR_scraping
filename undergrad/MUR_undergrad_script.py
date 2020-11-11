@@ -34,7 +34,7 @@ course_data = {'Level_Code': '', 'University': 'Murdoch University', 'City': '',
                'Blended': 'no', 'Remarks': ''}
 
 possible_cities = {'canberra': 'Canberra', 'bruce': 'Bruce', 'mumbai': 'Mumbai', 'melbourne': 'Melbourne',
-                   'brisbane': 'Brisbane', 'sydney': 'Sydney', 'queensland': 'Queensland', 'ningbo': 'Ningbo',
+                   'brisbane': 'Brisbane', 'sydney': 'Sydney', 'queensland': 'Queensland', 'perth': 'Perth',
                    'shanghai': 'Shanghai', 'bhutan': 'Bhutan', 'online': 'Online', 'hangzhou': 'Hangzhou',
                    'hanoi': 'Hanoi', 'bundoora': 'Bundoora', 'brunswick': 'Brunswick', 'bendigo': 'Victoria'}
 
@@ -100,4 +100,14 @@ for each_url in course_links_file:
             course_data['Description'] = desc_list
             print('COURSE DESCRIPTION: ', desc_list)
 
-    
+    # CITY
+    actual_cities.append('perth')
+
+    # PREREQUISITE
+    atar_tag = soup.find('div', class_='atar')
+    if atar_tag:
+        atar = atar_tag.find('span')
+        if atar:
+            course_data['Prerequisite_1_grade'] = atar.get_text()
+            course_data['Prerequisite_1'] = 'year 12'
+            print('ATAR: ', atar.get_text())
