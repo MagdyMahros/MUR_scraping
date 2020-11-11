@@ -59,3 +59,10 @@ for each_url in course_links_file:
     # SAVE COURSE URL
     course_data['Website'] = pure_url
 
+    # COURSE TITLE
+    title = soup.find('h1', class_='title')
+    if title:
+        title_text = title.get_text()
+        course_data['Course'] = title_text
+        print('COURSE TITLE: ', title_text)
+
