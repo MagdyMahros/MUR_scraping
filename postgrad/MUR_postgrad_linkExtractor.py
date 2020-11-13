@@ -2,7 +2,7 @@
     * author: Magdy Abdelkader
     * company: Fresh Futures/Seeka Technology
     * position: IT Intern
-    * date: 10-11-20
+    * date: 13-11-20
     * description:This script extracts all the courses links and save it in txt file.
 """
 from pathlib import Path
