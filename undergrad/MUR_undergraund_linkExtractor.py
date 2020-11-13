@@ -40,7 +40,7 @@ while condition:
             list_of_links.append(url)
     try:
         browser.execute_script("arguments[0].click();", WebDriverWait(browser, delay_).until(
-            EC.element_to_be_clickable((By.CSS_SELECTOR, '#main > div > div > section.search-results > div > div.row.py-5 > div > div > div:nth-child(4) > div > ul > li:nth-child(5) > a'))))
+            EC.element_to_be_clickable((By.CSS_SELECTOR, 'a[rel="next"]'))))
     except TimeoutException:
         print('timeout')
         condition = False
