@@ -152,12 +152,16 @@ for each_url in course_links_file:
         if duration:
             duration_text = duration.get_text()
             duration_ = re.search(r'\d+', duration_text)
-            if duration_:
-                if 1 in duration_:
-                    course_data['Duration'] = duration_
+            if duration_ is not None:
+                if duration_ == 1:
+                    course_data['Duration'] = duration_.group()
                     course_data['Duration_Time'] = 'Year'
                 else:
-                    course_data['Duration'] = duration_
+                    course_data['Duration'] = duration_.group()
                     course_data['Duration_Time'] = 'Years'
-                print('Duration: ', str(course_data['Duration']) + ' / ' + course_data['Duration_Time'])
+    else:
+        course_data['Duration'] = 'Not mentioned'
+        course_data['Duration_Time'] = 'Not mentioned'
+    print('Duration: ', str(course_data['Duration']) + ' / ' + course_data['Duration_Time'])
+
 
