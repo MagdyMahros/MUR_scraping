@@ -22,7 +22,7 @@ exec_path = exec_path.parent.__str__() + '/Libraries/Google/v86/chromedriver.exe
 browser = webdriver.Chrome(executable_path=exec_path, options=option)
 
 # MAIN ROUTINE
-courses_page_url = 'https://search.murdoch.edu.au/s/search.html?collection=mu-course-search&query=&sort=&resultView=Grid&f.Study+level%7CcourseStudyLevel=Undergraduate&num_ranks=45'
+courses_page_url = 'https://search.murdoch.edu.au/s/search.html?collection=mu-course-search&query=&sort=&resultView=Grid&f.Study+level%7CcourseStudyLevel=Undergraduate&f.Study+type%7CstudyType=Course&start_rank=1'
 list_of_links = []
 browser.get(courses_page_url)
 the_url = browser.page_source
@@ -33,7 +33,7 @@ condition = True
 while condition:
     result_tag = browser.find_element_by_class_name('list-unstyled.row')
     if result_tag:
-        result_elements = result_tag.find_elements_by_tag_name('li')
+        result_elements = result_tag.find_elements_by_xpath('li')
         for i, element in enumerate(result_elements):
             a_tag = element.find_element_by_tag_name('a')
             url = a_tag.get_attribute('title')

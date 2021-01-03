@@ -22,7 +22,7 @@ exec_path = exec_path.parent.__str__() + '/Libraries/Google/v86/chromedriver.exe
 browser = webdriver.Chrome(executable_path=exec_path, options=option)
 
 # MAIN ROUTINE
-courses_page_url = 'https://search.murdoch.edu.au/s/search.html?collection=mu-course-search&query=&sort=&resultView=Grid&f.Study+level%7CcourseStudyLevel=Postgraduate&num_ranks=45'
+courses_page_url = 'https://search.murdoch.edu.au/s/search.html?collection=mu-course-search&query=&sort=&resultView=Grid&f.Study+level%7CcourseStudyLevel=Postgraduate&f.Study+type%7CstudyType=Course'
 list_of_links = []
 browser.get(courses_page_url)
 the_url = browser.page_source
